@@ -46,6 +46,8 @@ class View extends Simpla
 
 			// Все валюты
 			$this->currencies = $this->money->get_currencies(array('enabled'=>1));
+			
+			
 	
 			// Выбор текущей валюты
 			if($currency_id = $this->request->get('currency_id', 'integer'))
@@ -76,7 +78,7 @@ class View extends Simpla
 			// Текущая страница (если есть)
 			$subdir = substr(dirname(dirname(__FILE__)), strlen($_SERVER['DOCUMENT_ROOT']));
 			$page_url = trim(substr($_SERVER['REQUEST_URI'], strlen($subdir)),"/");
-			if(strpos($page_url, '?') !== false)
+			if(strpos($page_url, '?') > 0)
 				$page_url = substr($page_url, 0, strpos($page_url, '?'));
 			$this->page = $this->pages->get_page((string)$page_url);
 			$this->design->assign('page', $this->page);		

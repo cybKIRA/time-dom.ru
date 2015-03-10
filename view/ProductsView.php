@@ -50,7 +50,7 @@ class ProductsView extends View
 		}
 
 		// Если задано ключевое слово
-		$keyword = $this->request->get('keyword');
+		$keyword = $this->request->get('keyword', 'string');
 		if (!empty($keyword))
 		{
 			$this->design->assign('keyword', $keyword);
@@ -66,19 +66,27 @@ class ProductsView extends View
 			$filter['sort'] = 'position';			
 		$this->design->assign('sort', $filter['sort']);
 		
+		if($on_page = $this->request->get('on_page', 'string'))
+		$_SESSION['on_page'] = $on_page;
+		if (!empty($_SESSION['on_page']))
+		$filter['on_page'] = $_SESSION['on_page'];
+		else
+		$filter['on_page'] = $this->settings->products_num;
+		$this->design->assign('on_page', $filter['on_page']);
+		$this->design->assign('on_pages', $this->settings->products_num);
+		
 		// Свойства товаров
 		if(!empty($category))
 		{
 			$features = array();
+			$filter['features'] = array();
 			foreach($this->features->get_features(array('category_id'=>$category->id, 'in_filter'=>1)) as $feature)
 			{ 
 				$features[$feature->id] = $feature;
-				if(($val = strval($this->request->get($feature->id)))!='')
-					$filter['features'][$feature->id] = $val;	
+				if($val = $this->request->get($feature->id))
+					$filter['features'][$feature->id] = $val;
 			}
-			
-			$options_filter['visible'] = 1;
-			
+
 			$features_ids = array_keys($features);
 			if(!empty($features_ids))
 				$options_filter['feature_id'] = $features_ids;
@@ -87,7 +95,7 @@ class ProductsView extends View
 				$options_filter['features'] = $filter['features'];
 			if(!empty($brand))
 				$options_filter['brand_id'] = $brand->id;
-			
+
 			$options = $this->features->get_options($options_filter);
 
 			foreach($options as $option)
@@ -95,18 +103,45 @@ class ProductsView extends View
 				if(isset($features[$option->feature_id]))
 					$features[$option->feature_id]->options[] = $option;
 			}
-			
+
 			foreach($features as $i=>&$feature)
-			{ 
+			{
 				if(empty($feature->options))
 					unset($features[$i]);
 			}
-
+            $this->design->assign('filter_features', $filter['features']);
 			$this->design->assign('features', $features);
  		}
 
+		
+		if(isset($filter['features']))
+		$this->design->assign('ff', $filter['features']);
+
+		$pmm = $this->products->count_products($filter, 'all');
+		$this->design->assign('minCost', (int)$pmm->minCost);
+		$this->design->assign('maxCost', (int)$pmm->maxCost);
+
+		$minCurr = (int)$this->request->get('minCurr');
+		if (empty($minCurr)) $minCurr=(int)$pmm->minCost;
+		if (true || !empty($minCurr))
+		{
+			$this->design->assign('minCurr', $minCurr);
+			$filter['minCurr'] = $minCurr;
+		}
+
+		$maxCurr = (int)$this->request->get('maxCurr');
+		if (empty($maxCurr)) $maxCurr=(int)$pmm->maxCost;
+		if (true || !empty($maxCurr))
+		{
+			$this->design->assign('maxCurr', $maxCurr);
+			$filter['maxCurr'] = $maxCurr;
+		}
+
+		
+		
+		
 		// Постраничная навигация
-		$items_per_page = $this->settings->products_num;		
+        $items_per_page = $filter['on_page'];	
 		// Текущая страница в постраничном выводе
 		$current_page = $this->request->get('page', 'int');	
 		// Если не задана, то равна 1
@@ -114,18 +149,11 @@ class ProductsView extends View
 		$this->design->assign('current_page_num', $current_page);
 		// Вычисляем количество страниц
 		$products_count = $this->products->count_products($filter);
-		
-		// Показать все страницы сразу
-		if($this->request->get('page') == 'all')
-			$items_per_page = $products_count;	
-		
 		$pages_num = ceil($products_count/$items_per_page);
 		$this->design->assign('total_pages_num', $pages_num);
-		$this->design->assign('total_products_num', $products_count);
 
 		$filter['page'] = $current_page;
 		$filter['limit'] = $items_per_page;
-		
 		///////////////////////////////////////////////
 		// Постраничная навигация END
 		///////////////////////////////////////////////

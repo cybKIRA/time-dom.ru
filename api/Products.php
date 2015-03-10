@@ -36,6 +36,7 @@ class Products extends Simpla
 		$features_filter = '';
 		$keyword_filter = '';
 		$visible_filter = '';
+		$visible_filter = '';
 		$is_featured_filter = '';
 		$discounted_filter = '';
 		$in_stock_filter = '';
@@ -64,6 +65,10 @@ class Products extends Simpla
 
 		if(!empty($filter['featured']))
 			$is_featured_filter = $this->db->placehold('AND p.featured=?', intval($filter['featured']));
+			
+			if(!empty($filter['order']))
+			$order = $filter['order'];
+
 
 		if(!empty($filter['discounted']))
 			$discounted_filter = $this->db->placehold('AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>0 LIMIT 1) = ?', intval($filter['discounted']));
@@ -77,31 +82,51 @@ class Products extends Simpla
  		if(!empty($filter['sort']))
 			switch ($filter['sort'])
 			{
+				// По умолчанию
 				case 'position':
 				$order = 'p.position DESC';
 				break;
-				case 'name':
+				
+				// по имени от А до Я
+				case 'name_asc':
 				$order = 'p.name';
 				break;
+				
+				// по имени от Я до А
+				case 'name_desc':
+				$order = 'p.name DESC';
+				break;
+				
 				case 'created':
 				$order = 'p.created DESC';
 				break;
-				case 'price':
-				//$order = 'pv.price IS NULL, pv.price=0, pv.price';
-				$order = '(SELECT -pv.price FROM __variants pv WHERE (pv.stock IS NULL OR pv.stock>0) AND p.id = pv.product_id AND pv.position=(SELECT MIN(position) FROM __variants WHERE (stock>0 OR stock IS NULL) AND product_id=p.id LIMIT 1) LIMIT 1) DESC';
+				
+				// по цене Низкие > Высокие
+				case 'price_asc':
+				$order = '(SELECT pv.price FROM __variants pv WHERE (pv.stock IS NULL OR pv.stock>0) AND p.id = pv.product_id AND pv.position=(SELECT MIN(position) FROM __variants WHERE (stock>0 OR stock IS NULL) AND product_id=p.id LIMIT 1) LIMIT 1)';
 				break;
+				
+				// по цене Высокие < Низкие
+				case 'price_desc':
+				$order = '(SELECT pv.price FROM __variants pv WHERE (pv.stock IS NULL OR pv.stock>0) AND p.id = pv.product_id AND pv.position=(SELECT MIN(position) FROM __variants WHERE (stock>0 OR stock IS NULL) AND product_id=p.id LIMIT 1) LIMIT 1) DESC';
+				break;
+				
+				case 'rating':
+				$order = 'p.rating DESC,p.position';
+				break;	
 			}
 
 		if(!empty($filter['keyword']))
 		{
 			$keywords = explode(' ', $filter['keyword']);
 			foreach($keywords as $keyword)
-				$keyword_filter .= $this->db->placehold('AND (p.name LIKE "%'.$this->db->escape(trim($keyword)).'%" OR p.meta_keywords LIKE "%'.$this->db->escape(trim($keyword)).'%") ');
+				$keyword_filter .= $this->db->placehold('AND (p.name LIKE "%'.mysql_real_escape_string(trim($keyword)).'%" OR p.meta_keywords LIKE "%'.mysql_real_escape_string(trim($keyword)).'%") ');
 		}
 
 		if(!empty($filter['features']) && !empty($filter['features']))
 			foreach($filter['features'] as $feature=>$value)
-				$features_filter .= $this->db->placehold('AND p.id in (SELECT product_id FROM __options WHERE feature_id=? AND value=? ) ', $feature, $value);
+				$features_filter .= $this->db->placehold('AND p.id in (SELECT product_id FROM __options WHERE feature_id=? AND value in (?@) ) ', $feature, $value);
+
 
 		$query = "SELECT  
 					p.id,
@@ -110,6 +135,8 @@ class Products extends Simpla
 					p.name,
 					p.annotation,
 					p.body,
+					p.rating,
+					p.votes,
 					p.position,
 					p.created as created,
 					p.visible, 
@@ -132,10 +159,13 @@ class Products extends Simpla
 					$discounted_filter
 					$in_stock_filter
 					$visible_filter
+					".(isset($filter['minCurr']) ? "AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.price>='".$filter['minCurr']."' LIMIT 1) = 1" : '')."
+					".(isset($filter['maxCurr']) ? "AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.price<='".$filter['maxCurr']."' LIMIT 1) = 1" : '')."
 				$group_by
 				ORDER BY $order
 					$sql_limit";
 
+		$query = $this->db->placehold($query);
 		$this->db->query($query);
 
 		return $this->db->results();
@@ -149,15 +179,13 @@ class Products extends Simpla
 	* keyword - ключевое слово для поиска
 	* features - фильтр по свойствам товара, массив (id свойства => значение свойства)
 	*/
-	public function count_products($filter = array())
+	public function count_products($filter = array(), $type='')
 	{		
 		$category_id_filter = '';
 		$brand_id_filter = '';
-		$product_id_filter = '';
 		$keyword_filter = '';
 		$visible_filter = '';
 		$is_featured_filter = '';
-		$in_stock_filter = '';
 		$discounted_filter = '';
 		$features_filter = '';
 		
@@ -166,22 +194,16 @@ class Products extends Simpla
 
 		if(!empty($filter['brand_id']))
 			$brand_id_filter = $this->db->placehold('AND p.brand_id in(?@)', (array)$filter['brand_id']);
-
-		if(!empty($filter['id']))
-			$product_id_filter = $this->db->placehold('AND p.id in(?@)', (array)$filter['id']);
 		
 		if(isset($filter['keyword']))
 		{
 			$keywords = explode(' ', $filter['keyword']);
 			foreach($keywords as $keyword)
-				$keyword_filter .= $this->db->placehold('AND (p.name LIKE "%'.$this->db->escape(trim($keyword)).'%" OR p.meta_keywords LIKE "%'.$this->db->escape(trim($keyword)).'%") ');
+				$keyword_filter .= $this->db->placehold('AND (p.name LIKE "%'.mysql_real_escape_string(trim($keyword)).'%" OR p.meta_keywords LIKE "%'.mysql_real_escape_string(trim($keyword)).'%") ');
 		}
 
 		if(!empty($filter['featured']))
 			$is_featured_filter = $this->db->placehold('AND p.featured=?', intval($filter['featured']));
-
-		if(!empty($filter['in_stock']))
-			$in_stock_filter = $this->db->placehold('AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.price>0 AND (pv.stock IS NULL OR pv.stock>0) LIMIT 1) = ?', intval($filter['in_stock']));
 
 		if(!empty($filter['discounted']))
 			$discounted_filter = $this->db->placehold('AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>0 LIMIT 1) = ?', intval($filter['discounted']));
@@ -192,25 +214,30 @@ class Products extends Simpla
 		
 		if(!empty($filter['features']) && !empty($filter['features']))
 			foreach($filter['features'] as $feature=>$value)
-				$features_filter .= $this->db->placehold('AND p.id in (SELECT product_id FROM __options WHERE feature_id=? AND value=? ) ', $feature, $value);
+				$features_filter .= $this->db->placehold('AND p.id in (SELECT product_id FROM __options WHERE feature_id=? AND value in (?@) ) ', $feature, $value);
+				
 		
-		$query = "SELECT count(distinct p.id) as count
-				FROM __products AS p
+		$query = "SELECT count(distinct p.id) as count ".($type=='all' ? ', min(v.price) minCost, max(v.price) maxCost ' : '')." 
+				FROM __products AS p ".($type=='all' ? 'INNER JOIN __variants v ON (v.product_id = p.id) ' : '')."
 				$category_id_filter
 				WHERE 1
 					$brand_id_filter
-					$product_id_filter
 					$keyword_filter
 					$is_featured_filter
-					$in_stock_filter
 					$discounted_filter
 					$visible_filter
-					$features_filter ";
+					$features_filter 
+					".(isset($filter['minCurr']) ? "AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.price>='".$filter['minCurr']."' LIMIT 1) = 1" : '')."
+					".(isset($filter['maxCurr']) ? "AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.price<='".$filter['maxCurr']."' LIMIT 1) = 1" : '')."
+					
+					";
 
 		$this->db->query($query);	
-		return $this->db->result('count');
+		if($type=='all')
+			return $this->db->result();
+		else
+			return $this->db->result('count');
 	}
-
 
 	/**
 	* Функция возвращает товар по id
@@ -231,6 +258,8 @@ class Products extends Simpla
 					p.name,
 					p.annotation,
 					p.body,
+					p.rating,
+					p.votes,
 					p.position,
 					p.created as created,
 					p.visible, 
@@ -386,9 +415,10 @@ class Products extends Simpla
     		
     	return $new_id;
 	}
+	
 
 	
-	public function get_related_products($product_id = array())
+	function get_related_products($product_id = array())
 	{
 		if(empty($product_id))
 			return array();
@@ -479,9 +509,9 @@ class Products extends Simpla
 			$ext = pathinfo($filename, PATHINFO_EXTENSION);
 			
 			// Удалить все ресайзы
-			$rezised_images = glob($this->config->root_dir.$this->config->resized_images_dir.$file.".*x*.".$ext);
+			$rezised_images = glob($this->config->root_dir.$this->config->resized_images_dir.$file."*.".$ext);
 			if(is_array($rezised_images))
-			foreach (glob($this->config->root_dir.$this->config->resized_images_dir.$file.".*x*.".$ext) as $f)
+			foreach (glob($this->config->root_dir.$this->config->resized_images_dir.$file."*.".$ext) as $f)
 				@unlink($f);
 
 			@unlink($this->config->root_dir.$this->config->original_images_dir.$filename);		

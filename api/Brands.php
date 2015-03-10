@@ -33,6 +33,18 @@ class Brands extends Simpla
 
 		return $this->db->results();
 	}
+	
+	
+	public function get_rand_brands($count = 2)
+	{
+		$brands = array();
+		$category_id_filter = '';
+		// Выбираем все бренды
+		$query = $this->db->placehold("SELECT id, name, url, meta_title, meta_keywords, meta_description, description, image FROM __brands WHERE 1 ORDER BY RAND() LIMIT $count");
+		$this->db->query($query);
+ 
+		return $this->db->results();
+	}
 
 	/*
 	*

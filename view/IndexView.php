@@ -34,7 +34,11 @@ class IndexView extends View
 	{
 		// Содержимое корзины
 		$this->design->assign('cart',		$this->cart->get_cart());
-	
+		
+		// Содержимое сравнения товаров
+		if($this->request->get('module', 'string')!=='CompareView')
+		$this->design->assign('compare_informer', $this->compare->get_compare_informer());
+			
         // Категории товаров
 		$this->design->assign('categories', $this->categories->get_categories_tree());
 		

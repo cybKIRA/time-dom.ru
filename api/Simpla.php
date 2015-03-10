@@ -13,6 +13,7 @@ class Simpla
 {
 	// Свойства - Классы API
 	private $classes = array(
+		'compare'    => 'Compare',
 		'config'     => 'Config',
 		'request'    => 'Request',
 		'db'         => 'Database',
