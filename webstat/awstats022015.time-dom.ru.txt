@@ -1,0 +1,468 @@
+AWSTATS DATA FILE 7.0 (build 1.971)
+# If you remove this file, all statistics for date 201502 will be lost/reset.
+# Last config file used to build this data file was /etc/awstats/awstats.time-dom.ru.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1991                
+POS_TIME 2662                
+POS_VISITOR 11315               
+POS_DAY 11730               
+POS_DOMAIN 3406                
+POS_LOGIN 3637                
+POS_ROBOT 3792                
+POS_WORMS 4140                
+POS_EMAILSENDER 4271                
+POS_EMAILRECEIVER 4414                
+POS_SESSION 12236               
+POS_SIDER 12399               
+POS_FILETYPES 4549                
+POS_DOWNLOADS 4785                
+POS_OS 4855                
+POS_BROWSER 4982                
+POS_SCREENSIZE 5348                
+POS_UNKNOWNREFERER 5422                
+POS_UNKNOWNREFERERBROWSER 5608                
+POS_ORIGIN 5740                
+POS_SEREFERRALS 5879                
+POS_PAGEREFS 6034                
+POS_SEARCHWORDS 6209                
+POS_KEYWORDS 6375                
+POS_MISC 2326                
+POS_ERRORS 6448                
+POS_CLUSTER 3493                
+POS_SIDER_404 6561                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20150301013318 1 0 7537876366218
+FirstTime 20150209010525
+LastTime 20150228033251
+LastUpdate 20150302000107 1 0 0 0 0
+TotalVisits 47                  
+TotalUnique 1                   
+MonthHostsKnown 0                   
+MonthHostsUnknown 12                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 0 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 6 6 183023 1 2 8157
+1 11 11 385262 13 13 207622
+2 8 8 280192 12 14 262665
+3 12 12 420283 27 41 201876
+4 13 36 1233967 13 28 72705
+5 9 60 1918443 1 10 10391
+6 7 7 218045 4 5 27123
+7 8 8 272857 8 10 171996
+8 7 7 245167 0 0 0
+9 7 7 218043 7 8 47963
+10 6 6 210144 117 117 2942089
+11 9 39 1209417 3 4 49835
+12 0 0 0 11 13 137285
+13 1 1 408 16 17 195032
+14 6 104 3365023 11 13 323408
+15 4 107 3359143 4 4 115632
+16 8 83 2647483 14 14 81513
+17 16 67 1751874 12 12 141701
+18 3 52 1715827 10 10 216019
+19 0 0 0 4 5 47358
+20 2 2 42929 4 8 85178
+21 2 2 42928 11 11 155990
+22 1 7 132512 3 5 179967
+23 7 58 1795488 17 17 317583
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+ip 153 690 21648458
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 6
+yandex 23 183415 20150228172541 12
+no_user_agent 6 183516 20150223100401 0
+ng\/1\. 4 70872 20150220041242 0
+bot[\s_+:,\.\;\/\\-] 4 23264 20150227205502 0
+crawl 3 134446 20150212142215 1
+core 2 70047 20150213204044 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 9
+eot 6 164512 0 0
+css 90 4517956 0 0
+png 181 5522199 0 0
+woff 12 473472 0 0
+html 120 3544255 0 0
+js 192 5224368 0 0
+jpg 66 2028609 0 0
+Unknown 15 152727 0 0
+gif 8 20360 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 1
+/robots.txt 13 0 7319
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS 8
+linuxandroid 2
+winxp 64
+linuxubuntu 33
+linux 4
+winvista 1
+win7 398
+macosx 185
+Unknown 3
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 19
+android 2
+chrome36.0.1944.0 69
+chrome40.0.2214.111 55
+chrome39.0.2171.95 54
+chrome31.0.1650.57 104
+firefox34.0 2
+opera9.80 53
+firefox3.6.23 16
+msie8.0 54
+chrome25.0.1364.160 33
+mozilla 2
+chrome34.0.1847.132 4
+firefox16.0 20
+chrome34.0.1847.116 1
+msie10.0 52
+safari8.0.2 115
+Unknown 1
+firefox35.0 52
+firefox3.6.13 1
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 2
+acHTTP_component_(AppControls.com) 20150219201130
+Mozilla/4.0_(compatible;_Synapse) 20150215230500
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 1
+acHTTP_component_(AppControls.com) 20150219201130
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 109 111
+From1 16 16
+From2 8 8
+From3 1 1
+From4 19 554
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 1
+yandex 8 8
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 1
+http://vk.com/away.php 1 1
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 1
+time-dom.ru 6
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 1
+time-dom.ru 6
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+401 4 4476
+302 4 1804
+404 329 5327248
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 149
+/phpMyAdmin/index.php 1 -
+/phpMyAdmin-2.6.0/index.php 1 -
+/phpmanager/index.php 1 -
+/admin/content/sitetree/ 2 -
+/phpMyAdmin-2.6.4-pl3/index.php 1 -
+/phpMyAdmin-2.5.5-rc2/index.php 1 -
+/admin.php 45 -
+//public_html.zip 1 -
+/websql/index.php 1 -
+//www.zip 1 -
+/phpMyAdmin-2.6.0-rc1/index.php 1 -
+/phpMyAdmin-2.5.1/index.php 1 -
+/engine/inc/include/init.php 1 -
+/web/phpMyAdmin/index.php 1 -
+/phpMyAdmin-2.6.2-pl1/index.php 1 -
+/blog 2 Connection:%20close
+/phpMyAdmi/index.php 1 -
+/typo3/index.php 1 -
+/phpMyAdmin-2.6.0-pl3/index.php 1 -
+/phpMyAdmin-2.6.0-beta2/index.php 1 -
+/phpMyAds/index.php 1 -
+/node/ 2 -
+/phpMyAdmin-2.7.0-pl1/index.php 1 -
+/phpMyAdmin-2.6.0-pl1/index.php 1 -
+/phpMyAdmin-2.5.7-pl1/index.php 1 -
+/phpMyAdmin-2.8.0.1/index.php 1 -
+/sqlweb/index.php 1 -
+/phpMyAdmin-2.5.5-rc1/index.php 1 -
+/save_.php 1 -
+/phpMyAdmin-2.6.4/index.php 1 -
+/netcat/admin/skins/default/css/style.css 2 -
+/administrator/ 28 -
+/bitrix/js/main/core/core.css 2 -
+/components/com_hdflvplayer/hdflvplayer/download.php 1 -
+/phpMyAdmin-2.8.1/index.php 1 -
+/phpMyAdmin-2.6.1-rc2/index.php 1 -
+/images/cms/admin/mac/common/butterfly.png 2 -
+/phpMyAdmin-2.8.0.3/index.php 1 -
+/PMA/index.php 1 -
+/phpMyAdmin-2.6.0-alpha2/index.php 1 -
+/phpMyAdmin-2.6.4-pl2/index.php 1 -
+/phpMyAdmin-2.2.6/index.php 1 -
+/wp-login.php 50 -
+/phpMyAdmin-2.5.5/index.php 1 -
+/dbadmin/index.php 1 -
+/netcat/admin/skins/default/css/login.css 2 -
+/phpMyAdmin-2.8.0-rc2/index.php 1 -
+/admin/mysql/index.php 1 -
+/phpMyAdmin-2.6.3-pl1/index.php 1 -
+/modules/system/system.base.css 2 -
+/phpMyAdmin-2.5.6/index.php 1 -
+/phpMyAdmin-2.6.4-rc1/index.php 1 -
+/p/m/a/index.php 1 -
+/phpMyAdmin-2.6.2/index.php 1 -
+/phpMyAdmin-2.6.1-pl2/index.php 1 -
+/phpMyAdmin-2.7.0-rc1/index.php 1 -
+/phpMyAdmin-2.6.1/index.php 1 -
+/index.html 3 -
+/phpMyAdmin1/index.php 1 -
+/webadmin/index.php 1 -
+/phpm/index.php 1 -
+/sqlmanager/index.php 1 -
+/admin/phpmyadmin/index.php 1 -
+/%0D/time-dom.ru.zip 1 -
+/php-my-admin/index.php 1 -
+/styles/skins/mac/design/css/style.css 2 -
+/mysqlmanager/index.php 1 -
+/users/registrate/ 2 -
+/phpMyAdmin-2.5.6-rc1/index.php 1 -
+/phpMyAdmin-2.5.6-rc2/index.php 1 -
+/phpMyAdmin-2.7.0-pl2/index.php 1 -
+/administrator/index.php 23 -
+/wp-admin/images/wordpress-logo.png 2 -
+/mysqladmin/index.php 2 -
+/phpMyAdmin-2.8.1-rc1/index.php 1 -
+/phpMyAdmin-2.6.1-pl1/index.php 1 -
+/phpMyAdmin-2.8.0-rc1/index.php 1 -
+/phpMyAdmin-2/index.php 1 -
+/media/system/js/mootools.js 2 -
+/bitrix/admin/ 2 -
+/phpMyAdmin-2.8.2/index.php 1 -
+/news/ 1 -
+/phpMyAdmin-2.5.7/index.php 1 -
+/phpMyAdmin-2.6.0-rc2/index.php 1 -
+/phpMyAdmin-2.6.2-beta1/index.php 1 -
+/user/password/ 2 -
+/phpMyAdmin-2.8.0.4/index.php 1 -
+/phpMyAdmin-2.8.0/index.php 1 -
+/phpMyAdmin-2.2.3/index.php 1 -
+/inc/plupload/examples/upload.php 1 -
+/%0D/www.zip 1 -
+/phpMyAdmin-2.7.0-beta1/index.php 1 -
+/admin/login.php 2 -
+/themes/engines/phptemplate/phptemplate.engine 1 -
+/PMA2005/index.php 1 -
+/phpMyAdmin-2.6.0-rc3/index.php 1 -
+/phpMyAdmin-2.6.3-rc1/index.php 1 -
+/styles/actions/users/form.css 1 -
+/admin/index.php 2 -
+/wp-admin/ 2 -
+/netcat/admin/ 2 -
+/phpMyAdmin-2.6.1-pl3/index.php 1 -
+/mysql-admin/index.php 2 -
+/phpMyAdmin-2.5.5-pl1/index.php 1 -
+/wp-content/ 2 -
+/php-myadmin/index.php 1 -
+/phpMyAdmin2/index.php 1 -
+/bitrix/admin/index.php 3 -
+/primozcigler 2 Connection:%20close
+/webdb/index.php 1 -
+/pma/index.php 1 -
+/contact.html 3 -
+/phpMyAdmin-2.6.1-rc1/index.php 1 -
+/phpmy/index.php 1 -
+//backup.tar.gz 1 -
+/phpmyadmin2/index.php 1 -
+/bitrix/themes/.default/images/auth_pict.gif 2 -
+/pma2005/index.php 1 -
+/phpMyAdmin-2.8.0.2/index.php 1 -
+/users/forget/ 2 -
+/templates/system/css/system.css 2 -
+/phpmyad/index.php 1 -
+/netcat/admin/skins/default/img/logo.png 2 -
+/modules/system/system.css 2 -
+/phpMyAdmin-2.6.2-rc1/index.php 2 -
+/phpMyAdmin-2.8.0-beta1/index.php 1 -
+/phpMyAdmin-2.6.0-beta1/index.php 1 -
+/phpMyAdmin-2.6.3/index.php 2 -
+//www.tar.gz 1 -
+/phpMyAdmin-2.6.4-pl1/index.php 1 -
+//time-dom.ru.tar.gz 1 -
+//public_html.tar.gz 1 -
+/bitrix/themes/.default/adminstyles.css 2 -
+/phpmyad-sys/index.php 1 -
+/phpMyAdmin-2.6.4-pl4/index.php 1 -
+/installed 2 -
+/db/index.php 1 -
+/phpMyAdmin-2.7.0/index.php 1 -
+/phpMyAdmin-2.5.4/index.php 1 -
+/mysql/index.php 1 -
+/wp-admin/css/wp-admin.css 2 -
+//backup.zip 1 -
+//time-dom.ru.zip 1 -
+/phpMyAdmin-2.6.0-pl2/index.php 1 -
+/admin/pma/index.php 1 -
+/phpMyAdmin-2.6.0-alpha/index.php 1 -
+/phpmy-admin/index.php 1 -
+/phpmyadmin/index.php 1 -
+/phpMyA/index.php 1 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 12
+194.58.98.61 153 153 4334966 20150228033251
+89.17.50.66 0 99 3258286 
+95.24.247.3 0 74 2431819 
+128.72.76.52 0 51 1630348 
+46.242.93.71 0 51 1630348 
+128.72.86.42 0 23 801471 
+5.9.112.205 0 51 1630348 
+95.66.128.45 0 30 912767 
+79.104.202.167 0 49 1629010 
+178.169.93.171 0 52 1634075 
+188.123.245.131 0 6 124672 
+176.195.32.85 0 51 1630348 
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 20
+20150209 3 9 195220 2
+20150210 2 2 42930 2
+20150211 2 2 42927 2
+20150212 3 3 50832 3
+20150213 1 1 35024 1
+20150214 2 2 42927 2
+20150215 4 55 1743324 4
+20150216 5 56 1760094 3
+20150217 4 56 1755915 2
+20150218 5 52 1753828 3
+20150219 2 2 70047 2
+20150220 5 86 2672549 3
+20150221 24 96 2790932 4
+20150222 1 1 35024 1
+20150223 11 188 5959075 3
+20150224 2 2 35432 2
+20150225 3 3 70617 3
+20150226 70 70 2451668 1
+20150227 2 2 70045 2
+20150228 2 2 70048 2
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 3
+1h+ 2
+0s-30s 43
+30mn-1h 2
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 13
+/ 118 3528493 44 38
+/design/webmarket/assets/zocial/css/zocial-regular-webfont.woff 6 210636 0 1
+/design/webmarket/assets/fontawesome/font/fontawesome-webfont.woff 6 262836 0 4
+/dostavka 4 30376 2 0
+/oplata 3 24063 0 1
+/design/webmarket/js/rs-plugin/font/revicons.eot 2 24740 0 1
+/design/webmarket/assets/zocial/css/zocial-regular-webfont.eot 2 64494 0 0
+/contact 2 16244 0 0
+/design/webmarket/assets/fontawesome/font/fontawesome-webfont.eot 2 75278 0 0
+/./cart 2 13356 0 0
+/./ 2 15762 0 0
+/products 2 13314 0 0
+/user/login 2 55374 1 2
+END_SIDER
